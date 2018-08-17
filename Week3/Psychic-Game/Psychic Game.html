@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Psychic Game</title>
+</head>
+
+<body>
+
+  <div id="game">
+    <p>Guess what letter I'm thinking of... Enter your first guess to start the game.</p>
+  
+  </div>
+
+  <script type="text/javascript">
+    // Letter array
+    var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    // Set beginning counts
+    var wins = 0;
+    var losses = 0;
+    var guessStartTotal = 10;
+    var UserGuess;
+    var usersChoices = [];
+              
+
+      // Captures the users key.
+      document.onkeyup = function(event) {
+
+      // Sets the key entered as event.key
+      userGuess = event.key;
+      console.log(userGuess);
+
+      // key entered array
+      
+      usersChoices.push(userGuess);
+
+
+
+      console.log(usersChoices);
+
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      console.log(computerGuess);
+
+
+      if (userGuess === computerGuess) {
+        wins++;
+        guessStartTotal--;
+      } 
+      else {
+        losses++;
+        guessStartTotal--;
+      }
+      if (guessStartTotal === 0) {
+        guessStartTotal = 10;
+        wins = 0;
+        losses = 0;
+        usersChoices = [];
+      }
+      
+      
+        // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guessStartTotal, and wins/losses/ties.
+        var html =
+          
+          "<hi>Guess what letter I'm thinking of... Enter your first guess to start the game.</h1>" +          
+          
+          // "<p>You chose: " + userGuess + "</p>" +
+          // "<p>The computer chose: " + computerGuess + "</p>" +
+          "<p>Wins: " + wins + "</p>" +
+          "<p>Losses: " + losses + "</p>" +
+          "<p>Guesses Left " + guessStartTotal + "</p>" +
+          "<p>Your Guesses so far: " + usersChoices + "</p>" ;
+          // "<p>You have 10 guess in the game. You have "+ guessStartTotal + " left" + "</p>" +
+          
+          // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+      }
+    
+  </script>
+
+</body>
+
+</html>
